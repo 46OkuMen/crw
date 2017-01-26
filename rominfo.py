@@ -1,3 +1,8 @@
+CONTROL_CODES = {'[86a5]': '\x86\x85',
+                 '[8754]': '\x87\x54',
+                 '[8755]': '\x87\x55',
+                 '[8756]': '\x87\x56'}
+
 FILES = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
          'CR6.EXE', 'CR7.EXE', 'CR8.EXE']
 
