@@ -5,6 +5,12 @@
 * Intro Autostart Glitch:
 	* Ensure that the length of TITOL.TXT, in bytes, is even.
 
+* Scenario End-Of-Input Control Code Change:
+	* 0df0:1c97 807efc20 cmp [bp-04], 20
+		* What file is at 0df0? (OPEN.EXE)
+		* This code is present in all CR*.EXE files and OPEN.EXE.
+		* Replace all instances of 807efc20 -> 807efc1f. Use 1f as the control code instead.
+
 * Formatting:
 	* Scenario text: 50 chars to a line
 	* Intro text: 50 chars
