@@ -88,3 +88,7 @@ FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0xa32c),  # character names, credits
                             (0x12703, 0x127c4), # error msgs
                             (0x127f2, 0x12840)],  # unit placement msgs"]
 }
+
+POINTER_CONSTANT = {
+    'CR1.EXE': 0x11020,
+}
