@@ -2,6 +2,8 @@ import re
 import os
 import openpyxl
 from collections import OrderedDict
+from romtools.dump import BorlandPointer, PointerExcel
+from romtools.disk import Gamefile
 
 from rominfo import POINTER_CONSTANT
 
@@ -27,11 +29,14 @@ def unpack(s, t=None):
 pointer_locations = OrderedDict()
 pointer_count = 0
 
+PtrXl = PointerExcel('crw_pointer_dump.xlsx')
+
 for gamefile in POINTER_CONSTANT:
     gamefile_path = os.path.join('original_roms', 'files', gamefile)
+    GF = Gamefile(gamefile_path, pointer_constant=POINTER_CONSTANT[gamefile])
     with open(gamefile_path, 'rb') as f:
         bytes = f.read()
-        target_area = (POINTER_CONSTANT[gamefile], len(bytes))
+        target_area = (GF.pointer_constant, len(bytes))
         print hex(target_area[0]), hex(target_area[1])
 
         only_hex = ""
@@ -45,19 +50,35 @@ for gamefile in POINTER_CONSTANT:
 
 
             pointer_location = '0x%05x' % pointer_location
-            text_location = location_from_pointer((p.group(1), p.group(2)), POINTER_CONSTANT[gamefile])
+            text_location = location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant)
 
             if not target_area[0] <= int(text_location, 16) <= target_area[1]:
                 continue
 
             all_locations = [pointer_location,]
 
-            if (gamefile, text_location) in pointer_locations:
-                all_locations = pointer_locations[(gamefile, text_location)]
+            if (GF.filename, text_location) in pointer_locations:
+                all_locations = pointer_locations[(GF.filename, text_location)]
                 all_locations.append(pointer_location)
 
-            pointer_locations[(gamefile, text_location)] = all_locations
+            pointer_locations[(GF, text_location)] = all_locations
 
+    # Setup the worksheet for this file
+    worksheet = PtrXl.add_worksheet(GF.filename)
 
-    for p in sorted(pointer_locations):
-        print p
+    row = 1
+
+    for (gamefile, text_location), pointer_locations in sorted((pointer_locations).iteritems()):
+        obj = BorlandPointer(gamefile, pointer_locations, text_location)
+        print text_location
+        print pointer_locations
+        for pointer_loc in pointer_locations:
+            worksheet.write(row, 0, text_location)
+            worksheet.write(row, 1, pointer_loc)
+            try:
+                worksheet.write(row, 2, obj.text())
+            except:
+                worksheet.write(row, 2, '')
+            row += 1
+
+PtrXl.close()
