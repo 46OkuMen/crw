@@ -1,4 +1,5 @@
 # crw
+![Game title screen, no translation here](http://46okumen.com/wp-content/uploads/2017/03/CRW_02.png)
 
 Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.com/)'s English translation patch for *CRW: Metal Jacket* (PC-98), a mecha strategy game.
 
@@ -7,7 +8,7 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 | ------------------|-----:|:------------:|
 | Opening           | 100% |              |
 | Main Menus        |  0%  |  (0 / 126)   |
-| Mission Briefings |  0%  |              |
+| Mission Briefings | 12%  |  (1 / 8)     |
 | Mission Dialogue  |  0%  |              |
 | Mission 1         |  0%  |  (0 / 122)   |
 | Mission 2         |  0%  |  (0 / 128)   |
