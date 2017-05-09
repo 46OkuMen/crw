@@ -37,7 +37,7 @@ for gamefile in POINTER_CONSTANT:
     with open(gamefile_path, 'rb') as f:
         bytes = f.read()
         target_area = (GF.pointer_constant, len(bytes))
-        print hex(target_area[0]), hex(target_area[1])
+        print(hex(target_area[0]), hex(target_area[1]))
 
         only_hex = ""
         for c in bytes:
@@ -68,10 +68,10 @@ for gamefile in POINTER_CONSTANT:
 
     row = 1
 
-    for (gamefile, text_location), pointer_locations in sorted((pointer_locations).iteritems()):
+    for (gamefile, text_location), pointer_locations in sorted((pointer_locations).items()):
         obj = BorlandPointer(gamefile, pointer_locations, text_location)
-        print text_location
-        print pointer_locations
+        print(text_location)
+        print(pointer_locations)
         for pointer_loc in pointer_locations:
             worksheet.write(row, 0, text_location)
             worksheet.write(row, 1, pointer_loc)

@@ -1,0 +1,24 @@
+The mouse's x position, /8, is stored in EDX. The window pops up at the mouse's location. So look for something that uses that value, and maybe that value plus 4?
+
+More specifically, the x value in pixels is stored in EDI.
+	Look for a4?
+	EDI gets rewritten by something else before the breakpoint is hit, so look for it being restored somewhere
+
+y value in pixels is stored in the stack, at memory address 2a77e.
+
+1076:3b2a 83c404 add sp, +04 ; more related to the stack than anything
+
+whoops, dx got xor dx, dx'd.
+
+Also look for 0x20, the space for four characters
+
+The window isn't written all at once. r-------7, then half a line of white space, then the rest of the line of white space
+	(Half a line of white space = one full line of white space in the smaller window.)
+	Sides are 8px wide
+
+Replaced tons of 20's with 30's: didn't work
+Replaced tons of 30's with 40's: didn't work
+
+18f92 is a good thing to breakpoint for some code that draws the window.
+	The line that adds +50 to di is telling it where in VRAM to draw some white pixels
+	So how to find the outer loop that tells it to draw more columns?

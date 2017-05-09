@@ -27,10 +27,10 @@ for n in ninmus:
         lines = f.readlines()
 
     with open('patched\\' + n, 'wb') as f:
-        print lines
+        print(lines)
         for l in lines:
-            print repr(l)
-            print len(l)
+            print(repr(l))
+            print(len(l))
             if len(l) % 2 == 1:
                 just_the_line = l.split('\r\n')[0]
                 l = just_the_line + " " + '\r\n'
@@ -85,11 +85,11 @@ for i in ivs:
                             window[j] += ' '*(32-len(window[j]))
 
             if words:
-                print "Not all words made it into this window"
+                print("Not all words made it into this window")
 
             joined_lines = ''.join(window)
             joined_lines = pad_iv(joined_lines)
-            print joined_lines
+            print(joined_lines)
             f.write(joined_lines)
     Data1Disk.insert('patched\\' + i)
 

@@ -25,12 +25,12 @@ for filename in FILES:
     worksheet.set_column('F:F', 60)
     row = 1
 
-    print "\n" + filename + "\n"
+    print("\n" + filename + "\n")
     with open(os.path.join('system', filename), 'rb') as f:
         for block in FILE_BLOCKS[filename]:
             block_length = block[1] - block[0]
-            print "block:", hex(block[0])
-            print "block length:", block_length
+            print("block:", hex(block[0]))
+            print("block length:", block_length)
             f.seek(block[0], 0)
             contents = f.read(block_length+1)
 
@@ -73,8 +73,8 @@ for filename in FILES:
 
             for s in sjis_strings:
                 loc = '0x' + hex(s[0]).lstrip('0x').zfill(5)
-                print loc
-                print repr(s[1])
+                print(loc)
+                print(repr(s[1]))
                 sjis_string = s[1].replace('\x87\x54', '[8754]')
                 sjis_string = sjis_string.replace('\x87\x55', '[8755]')
                 sjis_string = sjis_string.replace('\x87\x56', '[8756]')
