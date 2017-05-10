@@ -1,6 +1,6 @@
 import os
 
-from rominfo import FILES, FILE_BLOCKS, CONTROL_CODES, POINTER_CONSTANT
+from rominfo import FILES, FILE_BLOCKS, CONTROL_CODES, POINTER_CONSTANT, EOF_CHAR
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
 
@@ -19,19 +19,20 @@ FILES_TO_REINSERT = ['CR1.EXE',]
 for filename in FILES_TO_REINSERT:
     gamefile = Gamefile(filename, disk=OriginalCRW, dest_disk=TargetCRW, pointer_constant=POINTER_CONSTANT[filename])
     pointers = PtrDump.get_pointers(gamefile)
+
+    if filename == 'CR1.EXE':
+        gamefile.edit(0x9f3c, EOF_CHAR)     # Scenario EOF byte change
+        gamefile.edit(0xab36, b'\x0b')     # 1st command open
+        gamefile.edit(0xab6c, b'\x0c')     # 2nd command open
+        gamefile.edit(0xafb1, b'\x0b')     # 1st command close
+        gamefile.edit(0xafbd, b'\x0c')     # 2nd command close
     for block in FILE_BLOCKS[filename]:
         block = Block(gamefile, block)
         previous_text_offset = block.start
         diff = 0
         print(repr(block.blockstring))
-        #print gamefile.filestring[block.start:block.stop]
-        # TODO: Get pointers.
-        #for i, p in enumerate([ptr for ptr in pointers if block.start <= pointers[ptr][0].text_location < block.stop]):
-        #    next_p = pointers[i]
         for t in Dump.get_translations(block):
-            #if len(t.en_bytestring) == len(t.jp_bytestring) and t.en_bytestring != t.jp_bytestring:
-            #if (0x11862 <= t.location <= 0x1195e) and len(t.en_bytestring) == len(t.jp_bytestring) and t.en_bytestring != t.jp_bytestring:
-            if (0x11862 <= t.location <= 0x1195e) and t.en_bytestring != t.jp_bytestring:
+            if t.location < 0x11970 and t.en_bytestring != t.jp_bytestring:
                 print(t)
                 loc_in_block = t.location - block.start + diff
 
@@ -53,9 +54,6 @@ for filename in FILES_TO_REINSERT:
                 assert loc_in_block == i, (hex(loc_in_block), hex(i))
 
                 block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
-
-                #assert len(block.blockstring) == len(block.original_blockstring), "%s %s" % (len(block.blockstring), len(block.original_blockstring))
-                #print diff
 
                 gamefile.edit_pointers_in_range((previous_text_offset, t.location), diff)
                 previous_text_offset = t.location

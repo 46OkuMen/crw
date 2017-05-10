@@ -5,6 +5,7 @@ DEST_DISK_SYSTEM = os.path.join('patched', 'CRW_system.FDI')
 DEST_DISK_DATA_1 = os.path.join('patched', 'CRW_data1.FDI')
 DEST_DISK_DATA_2 = os.path.join('patched', 'CRW_data2.FDI')
 
+# TALK.TXT, IV1-8.TXT, TITOL.TXT, NINMU1-8.TXT
 FILES = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
          'CR6.EXE', 'CR7.EXE', 'CR8.EXE']
 
@@ -100,4 +101,4 @@ CONTROL_CODES = {'[86a5]': '\x86\x85',
                  '[8755]': '\x87\x55',
                  '[8756]': '\x87\x56'}
 
-EOF_CHAR = '\x1f'
+EOF_CHAR = b'\x10'

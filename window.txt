@@ -22,3 +22,39 @@ Replaced tons of 30's with 40's: didn't work
 18f92 is a good thing to breakpoint for some code that draws the window.
 	The line that adds +50 to di is telling it where in VRAM to draw some white pixels
 	So how to find the outer loop that tells it to draw more columns?
+
+1076:3e20 8b46fc mov ax, [bp-04] (= 6)
+1076:3e23 05feff add ax, fffe    (= 4)
+1076:3e26 3b46fe cmp ax, [bp-02] (9a is indeed > 4)
+1076:3e29 7fe4 jg 3e0f           (jump executes)
+Then do some stuff and call 183c:0b89.
+
+3eb1 8b46fa mov ax, [bp-06]  (= 8?)
+3eb4 05fcff add ax, fffc     ( = 4)
+3eb7 3bc7 cmp ax, di (04 > 00)
+3eb9 7f9c jg 3e57
+
+
+1076:3dce cmp ax (02), di (01)
+1076:3dd0 7fe7 jg 3db9
+Then do some stuff and call 183c:0b89.
+
+
+After the second breakpoint of reading the commmand str:
+1076:3b3e c6061626ff mov [2616], ff
+3b43 mov [bp-04], 6
+3b48 mov [bp-06], 8
+jmp 3d08
+
+Anything analogous for the larger window?
+1076:3b74 mov [2601], ff
+3b79 mov [bp-04], a
+3b7e mov [bp-06], 6
+
+
+The actual hack:
+Change 1076:3b46 from 6 to b (or maybe larger?)
+Change 1076:3b7b from a 
+
+segment 1076 is 6ff0 in CR1.EXE.
+So those two addresses are ab36 and ab6c.
