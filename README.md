@@ -6,20 +6,30 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 ### Progress
 | Segment           | %    | Strings      | 
 | ------------------|-----:|:------------:|
-| Opening           | 100% |              |
-| Main Menus        |  0%  |  (0 / 126)   |
+| Opening Scroll    | 100% |              |
+| System            |  0%  |  (0 / 126)   |
 | Mission Briefings | 12%  |  (1 / 8)     |
-| Mission Dialogue  |  0%  |              |
-| Mission 1         |  0%  |  (0 / 122)   |
-| Mission 2         |  0%  |  (0 / 128)   |
-| Mission 3         |  0%  |  (0 / 128)   |
-| Mission 4         |  0%  |  (0 / 128)   |
-| Mission 5         |  0%  |  (0 / 128)   |
-| Mission 6         |  0%  |  (0 / 128)   |
-| Mission 7         |  0%  |  (0 / 128)   |
-| Mission 8         |  0%  |  (0 / 128)   |
-| Interface Images  |  ?   |  (0 / ?)     |
-| Total             |  ?   |              |
+| Battle Quotes     | 100% | (75 / 75)    |
+| Mission 1 Dialogue| 100% | (17 / 17)    |
+| Mission 1 System  | 26%  | (32 / 122)   |
+| Mission 2 Dialogue|  0%  |  (0 / 14)    |
+| Mission 2 System  |  0%  |  (0 / 128)   |
+| Mission 3 Dialogue|  0%  |  (0 / 11)    |
+| Mission 3 System  |  0%  |  (0 / 128)   |
+| Mission 4 Dialogue|  0%  |  (0 / 8)     |
+| Mission 4 System  |  0%  |  (0 / 128)   |
+| Mission 5 Dialogue|  0%  |  (0 / 15)    |
+| Mission 5 System  |  0%  |  (0 / 128)   |
+| Mission 6 Dialogue|  0%  |  (0 / 9)     |
+| Mission 6 System  |  0%  |  (0 / 128)   |
+| Mission 7 Dialogue|  0%  |  (0 / 21)    |
+| Mission 7 System  |  0%  |  (0 / 128)   |
+| Mission 8 Dialogue|  0%  |  (0 / 15)    |
+| Mission 8 System  |  0%  |  (0 / 128)   |
+| Ending Dialogue   |  0%  |  (0 / 26)    |
+| Ending Scroll     |  0%  |              |
+| Interface Images  |  0%  |  (0 / 3?)    |
+| Total             |  9%  |(125 / 1366)  |
 
 
 ### How do I use this?

@@ -5,10 +5,12 @@ from collections import OrderedDict
 from romtools.dump import BorlandPointer, PointerExcel
 from romtools.disk import Gamefile
 
-from rominfo import POINTER_CONSTANT
+from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS
 
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
 
+# TODO: This regex seems awfully broad.
+# Maybe add a constraint that it's followed by 9a or ff? That seems to be common...
 pointer_regex = r'\\x68\\x([0-f][0-f])\\x([0-f][0-f])'
 
 def capture_pointers_from_function(hx): 
@@ -26,30 +28,32 @@ def unpack(s, t=None):
     value = (t * 0x100) + s
     return value
 
-pointer_locations = OrderedDict()
 pointer_count = 0
 
+os.remove('crw_pointer_dump.xlsx')
 PtrXl = PointerExcel('crw_pointer_dump.xlsx')
 
-for gamefile in POINTER_CONSTANT:
-    gamefile_path = os.path.join('original_roms', 'files', gamefile)
+for gamefile in FILES_WITH_POINTERS:
+    print(gamefile)
+    pointer_locations = OrderedDict()
+    gamefile_path = os.path.join('original', 'files', gamefile)
     GF = Gamefile(gamefile_path, pointer_constant=POINTER_CONSTANT[gamefile])
     with open(gamefile_path, 'rb') as f:
-        bytes = f.read()
-        target_area = (GF.pointer_constant, len(bytes))
+        bs = f.read()
+        target_area = (GF.pointer_constant, len(bs))
         print(hex(target_area[0]), hex(target_area[1]))
 
-        only_hex = ""
-        for c in bytes:
-            only_hex += '\\x%02x' % ord(c)
+        only_hex = u""
+        for c in bs:
+            only_hex += u'\\x%02x' % c
 
+        #print(only_hex)
         pointers = capture_pointers_from_function(only_hex)
 
         for p in pointers:
-            pointer_location = p.start()/4 + 1
+            pointer_location = p.start()//4 + 1
 
-
-            pointer_location = '0x%05x' % pointer_location
+            pointer_location = b'0x%05x' % pointer_location
             text_location = location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant)
 
             if not target_area[0] <= int(text_location, 16) <= target_area[1]:
@@ -70,15 +74,15 @@ for gamefile in POINTER_CONSTANT:
 
     for (gamefile, text_location), pointer_locations in sorted((pointer_locations).items()):
         obj = BorlandPointer(gamefile, pointer_locations, text_location)
-        print(text_location)
-        print(pointer_locations)
+        #print(text_location)
+        #print(pointer_locations)
         for pointer_loc in pointer_locations:
             worksheet.write(row, 0, text_location)
-            worksheet.write(row, 1, pointer_loc)
+            worksheet.write(row, 1, str(pointer_loc).lstrip("b'").rstrip("'"))
             try:
                 worksheet.write(row, 2, obj.text())
             except:
-                worksheet.write(row, 2, '')
+                worksheet.write(row, 2, u'')
             row += 1
 
 PtrXl.close()

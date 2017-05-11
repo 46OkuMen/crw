@@ -5,3 +5,8 @@
 	* With the CR1 assembly hacks restored to normal:
 		* Still breaks.
 	* So that means it's something to do with text or pointers in CR1.
+		* With the command text block inserted:
+			* Works.
+		* With command text & Save/Load/Quit text:
+			* Works.
+* Since the pointer format is so vague, this crash is likely caused by something that's not a pointer being edited mistakenly.

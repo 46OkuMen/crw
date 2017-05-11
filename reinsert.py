@@ -49,8 +49,6 @@ for filename in FILES_TO_REINSERT:
 
                 if j > 1:
                     print("%s multiples of this string found" % j)
-                #print("Looking for:", repr(t.jp_bytestring))
-                #print(repr(block.blockstring))
                 assert loc_in_block == i, (hex(loc_in_block), hex(i))
 
                 block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)

@@ -92,8 +92,19 @@ FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0xa32c),  # character names, credits
                             (0x127f2, 0x12840)],  # unit placement msgs"]
 }
 
+FILES_WITH_POINTERS = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE',
+                       'CR5.EXE', 'CR6.EXE', 'CR7.EXE', 'CR8.EXE']
+
 POINTER_CONSTANT = {
+    'OPEN.EXE': 0x9a70,
     'CR1.EXE': 0x11020,
+    'CR2.EXE': 0x11e50,
+    'CR3.EXE': 0x11c10,
+    'CR4.EXE': 0x11dc0,
+    'CR5.EXE': 0x11cb0,
+    'CR6.EXE': 0x11b90,
+    'CR7.EXE': 0x11df0,
+    'CR8.EXE': 0x11c10,
 }
 
 CONTROL_CODES = {'[86a5]': '\x86\x85',

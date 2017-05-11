@@ -54,7 +54,10 @@ Anything analogous for the larger window?
 
 The actual hack:
 Change 1076:3b46 from 6 to b (or maybe larger?)
-Change 1076:3b7b from a 
+Change 1076:3b7b from a to c
 
 segment 1076 is 6ff0 in CR1.EXE.
 So those two addresses are ab36 and ab6c.
+
+There are duplicates of those two mov commands elsewhere: afb1 and afbd.
+These control the window-close code, so they should be changed here too.
