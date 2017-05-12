@@ -61,3 +61,16 @@ So those two addresses are ab36 and ab6c.
 
 There are duplicates of those two mov commands elsewhere: afb1 and afbd.
 These control the window-close code, so they should be changed here too.
+
+Now, as for the window highlighting code:
+The width of both highlights is at 2a742.
+	This is really just a value in the stack though. (1a79:ffb2 == 2a742)
+	So how did it get there?
+
+	1076:3843 c746fa0400 mov [bp-06], 4  ; located at 0xa836
+	1076:3848 c746f80300 mov [bp-08], 3
+
+	1076:384f c746fa0800 mov [bp-06], 8  ; is this the second menu width? (yes)
+
+	1076:3877 c746fa0800 mov [bp-06], 8  ; or is this? (dunno what this is) a842
+

@@ -6,10 +6,12 @@ DEST_DISK_DATA_1 = os.path.join('patched', 'CRW_data1.FDI')
 DEST_DISK_DATA_2 = os.path.join('patched', 'CRW_data2.FDI')
 
 # TALK.TXT, IV1-8.TXT, TITOL.TXT, NINMU1-8.TXT
+# CRWUNI.TXT
 FILES = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
          'CR6.EXE', 'CR7.EXE', 'CR8.EXE']
 
-FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0xa32c),  # character names, credits
+FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0x9cd5),  # characters & guns
+                            (0x9cd5, 0xa32c),  # credits
                             (0xa59b, 0xa6fc),  # main menu text
                             (0xa78e, 0xa826),  # disk switch
                             (0xa976, 0xa9db),  # disk switch
@@ -107,9 +109,10 @@ POINTER_CONSTANT = {
     'CR8.EXE': 0x11c10,
 }
 
-CONTROL_CODES = {'[86a5]': '\x86\x85',
-                 '[8754]': '\x87\x54',
-                 '[8755]': '\x87\x55',
-                 '[8756]': '\x87\x56'}
+CONTROL_CODES = {b'[86a5]': b'\x86\x85',
+                 b'[8754]': b'\x87\x54',
+                 b'[8755]': b'\x87\x55',
+                 b'[8756]': b'\x87\x56',
+                 b'[00]':   b'\x00'}
 
 EOF_CHAR = b'\x10'

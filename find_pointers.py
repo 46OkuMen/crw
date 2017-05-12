@@ -5,7 +5,7 @@ from collections import OrderedDict
 from romtools.dump import BorlandPointer, PointerExcel
 from romtools.disk import Gamefile
 
-from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS
+from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS
 
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
 
@@ -30,7 +30,11 @@ def unpack(s, t=None):
 
 pointer_count = 0
 
-os.remove('crw_pointer_dump.xlsx')
+try:
+    os.remove('crw_pointer_dump.xlsx')
+except FileNotFoundError:
+    pass
+
 PtrXl = PointerExcel('crw_pointer_dump.xlsx')
 
 for gamefile in FILES_WITH_POINTERS:
@@ -40,8 +44,9 @@ for gamefile in FILES_WITH_POINTERS:
     GF = Gamefile(gamefile_path, pointer_constant=POINTER_CONSTANT[gamefile])
     with open(gamefile_path, 'rb') as f:
         bs = f.read()
-        target_area = (GF.pointer_constant, len(bs))
-        print(hex(target_area[0]), hex(target_area[1]))
+        target_areas = FILE_BLOCKS[gamefile]
+        # target_area = (GF.pointer_constant, len(bs))
+        #print(hex(target_area[0]), hex(target_area[1]))
 
         only_hex = u""
         for c in bs:
@@ -53,17 +58,17 @@ for gamefile in FILES_WITH_POINTERS:
         for p in pointers:
             pointer_location = p.start()//4 + 1
 
-            pointer_location = b'0x%05x' % pointer_location
-            text_location = location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant)
+            pointer_location = '0x%05x' % pointer_location
+            text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
 
-            if not target_area[0] <= int(text_location, 16) <= target_area[1]:
+            if all([not t[0] <= text_location<= t[1] for t in target_areas]):
                 continue
 
-            all_locations = [pointer_location,]
+            all_locations = [int(pointer_location, 16),]
 
             if (GF.filename, text_location) in pointer_locations:
                 all_locations = pointer_locations[(GF.filename, text_location)]
-                all_locations.append(pointer_location)
+                all_locations.append(int(pointer_location, 16))
 
             pointer_locations[(GF, text_location)] = all_locations
 
@@ -77,8 +82,8 @@ for gamefile in FILES_WITH_POINTERS:
         #print(text_location)
         #print(pointer_locations)
         for pointer_loc in pointer_locations:
-            worksheet.write(row, 0, text_location)
-            worksheet.write(row, 1, str(pointer_loc).lstrip("b'").rstrip("'"))
+            worksheet.write(row, 0, hex(text_location))
+            worksheet.write(row, 1, hex(pointer_loc))
             try:
                 worksheet.write(row, 2, obj.text())
             except:
