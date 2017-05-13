@@ -10,3 +10,9 @@
 		* With command text & Save/Load/Quit text:
 			* Works.
 * Since the pointer format is so vague, this crash is likely caused by something that's not a pointer being edited mistakenly.
+
+### Images
+* Try messing with the Reiko portrait instead of the bar. Starker color differences, easier to load on demand, smaller.
+
+### Patcher
+* Gotta call it Pachy98-CRW.exe.
