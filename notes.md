@@ -4,6 +4,7 @@
 
 * Intro Autostart Glitch:
 	* Ensure that the length of TITOL.TXT, in bytes, is even.
+	* Also make sure it ends in 0x1a.
 
 * Scenario End-Of-Input Control Code Change:
 	* 0df0:1c97 807efc20 cmp [bp-04], 20

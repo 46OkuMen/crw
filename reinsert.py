@@ -22,6 +22,7 @@ for filename in FILES_TO_REINSERT:
     pointers = PtrDump.get_pointers(gamefile)
 
     if filename == 'OPEN.EXE':
+        gamefile.edit(0x2e90, b'\x50\x01')   # intro timer
         gamefile.edit(0x582a, EOF_CHAR)
         gamefile.edit(0x8213, EOF_CHAR)
         gamefile.edit(0x84c1, EOF_CHAR)

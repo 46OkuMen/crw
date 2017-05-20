@@ -1,17 +1,18 @@
 # crw
 ![Game title screen, no translation here](http://46okumen.com/wp-content/uploads/2017/03/CRW_02.png)
 
-Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.com/)'s English translation patch for *CRW: Metal Jacket* (PC-98), a mecha strategy game.
+Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.com/)'s English translation patch for *CRW: Metal Jacket* (PC-98), a mecha military strategy game set in futuristic Japan.
 
-### Progress
+### Reinsertion Progress
 | Segment           | %    | Strings      | 
 | ------------------|-----:|:------------:|
 | Opening Scroll    | 100% |              |
-| System            |  0%  |  (0 / 126)   |
+| System            | 12%  | (15 / 126)   |
+| Weapon Names      | 44%  | (16 / 36)    |
 | Mission Briefings | 12%  |  (1 / 8)     |
 | Battle Quotes     | 100% | (75 / 75)    |
 | Mission 1 Dialogue| 100% | (17 / 17)    |
-| Mission 1 System  | 26%  | (32 / 122)   |
+| Mission 1 System  | 100% |(122 / 122)   |
 | Mission 2 Dialogue|  0%  |  (0 / 14)    |
 | Mission 2 System  |  0%  |  (0 / 128)   |
 | Mission 3 Dialogue|  0%  |  (0 / 11)    |
@@ -29,7 +30,7 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 | Ending Dialogue   |  0%  |  (0 / 26)    |
 | Ending Scroll     |  0%  |              |
 | Interface Images  |  0%  |  (0 / 3?)    |
-| Total             |  9%  |(125 / 1366)  |
+| Total             | 16%  |(231 / 1402)  |
 
 
 ### How do I use this?

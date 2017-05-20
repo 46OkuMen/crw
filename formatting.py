@@ -5,8 +5,12 @@ SystemDisk = Disk(DEST_DISK_SYSTEM)
 DemoDisk = Disk(DEST_DISK_DEMO)
 Data1Disk = Disk(DEST_DISK_DATA_1)
 
+titols =['TITOL.TXT',]
 ninmus = ['NINMU1.TXT']
-ivs = ['IV1.TXT', 'TALK.TXT']
+ivs = []
+
+#ninmus = ['NINMU1.TXT', 'TITOL.TXT']
+#ivs = ['IV1.TXT', 'TALK.TXT']
 
 def pad_iv(l):
     """Pad an IV*.TXT line to 80 characters.
@@ -23,7 +27,7 @@ def pad_iv(l):
 
 
 # For the NINMU*.TXT files, each line must be an even number of characters.
-for n in ninmus:
+for n in titols:
     with open('patched\original_' + n, 'rb') as f:
         lines = f.readlines()
 
@@ -32,25 +36,75 @@ for n in ninmus:
         for l in lines:
             print(repr(l))
             print(len(l))
-            if len(l) % 2 == 1:
-                just_the_line = l.split(b'\r\n')[0]
-                l = just_the_line + b" " + b'\r\n'
+            if len(l) != 50:
+                words = l.split(b' ')
+                formatted_lines = []
+                print(words)
+                while words:
+                    thisline = []
+                    while len(b' '.join(thisline)) < 50 and words:
+                        if len(b' '.join(thisline) + words[0]) + 1 <= 50:
+                            thisline.append(words.pop(0))
+                        else:
+                            break
+                    formatted_line = b' '.join(thisline)
+                    deficit = 50 - len(formatted_line)
+                    formatted_line += b' '*deficit
+                    assert len(formatted_line) == 50
+                    formatted_lines.append(formatted_line)
+                #print(formatted_lines)
 
-            #if len(l) > 50:
-            #    words = l.split(' ')
-            #    firstline = ''
-            #    while words and len(firstline + " " + words[0] + '\r\n') <= 50:
-            #        firstline += ' ' + words.pop(0)
-            #    firstline += '\r\n'
-            #    if words:
-            #        secondline = ''
-            #        while words and len(secondline + " " + words[0] + '\r\n') <= 50:
-            #            secondline += ' ' + words.pop(0)
-            #        secondline += '\r\n'
-            #    f.write(firstline)
-            #    f.write(secondline)
 
+        for l in formatted_lines:
+            print(l)
             f.write(l)
+        if n == 'TITOL.TXT':
+            f.write(b'\x1a')
+            #f.truncate(0x3b1)
+    DemoDisk.insert('patched\\' + n)
+
+for n in ninmus:
+    with open('patched\original_' + n, 'rb') as f:
+        lines = f.readlines()
+
+    with open('patched\\' + n, 'wb') as f:
+        print(lines)
+        for l in lines:
+            if len(l) > 50:
+                l = l.strip(b'\r\n')
+                words = l.split(b' ')
+                formatted_lines = []
+                while words:
+                    thisline = []
+                    while len(b' '.join(thisline)) <= 50 and words:
+                        if len(b' '.join(thisline) + words[0]) + 1 <= 50:
+                            thisline.append(words.pop(0))
+                        else:
+                            break
+                    formatted_line = b' '.join(thisline)
+                    if len(formatted_line) <= 48:
+                        deficit = 48 - len(formatted_line)
+                        formatted_line += b' '*deficit
+                        formatted_line += b'\r\n'
+                    elif len(formatted_line) == 49:
+                        formatted_line += b' '
+                    else:
+                        pass
+                    print(formatted_line)
+                    assert len(formatted_line) == 50, len(formatted_line)
+                    formatted_lines.append(formatted_line)
+
+            else:
+                formatted_lines = [l, ]
+
+            for l in formatted_lines:
+                if len(l) % 2 == 1:
+                    just_the_line = l.split(b'\r\n')[0]
+                    l = just_the_line + b" " + b'\r\n'
+                print(l)
+                f.write(l)
+
+        f.write(EOF_CHAR)
     DemoDisk.insert('patched\\' + n)
 
 # For IV*.TXT files, each window must be 80 characters long, with 32-character lines.
@@ -113,4 +167,4 @@ with open('patched\\TALK.TXT', 'wb') as f:
             print(l)
 """
 
-SystemDisk.insert('patched\CR1.EXE')
+#SystemDisk.insert('patched\CR1.EXE')
