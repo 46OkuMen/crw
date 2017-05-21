@@ -30,11 +30,11 @@ for filename in FILES_TO_REINSERT:
     if filename == 'CR1.EXE':
         gamefile.edit(0x9f3c, EOF_CHAR)     # Scenario EOF byte change
         gamefile.edit(0xa836, b'\x09')     # 1st command highlight
-        gamefile.edit(0xa842, b'\x0b')     # 2nd command highlight
+        #gamefile.edit(0xa842, b'\x0b')     # 2nd command highlight
         gamefile.edit(0xab36, b'\x0b')     # 1st command open
-        gamefile.edit(0xab6c, b'\x0d')     # 2nd command open
+        #gamefile.edit(0xab6c, b'\x0d')     # 2nd command open
         gamefile.edit(0xafb1, b'\x0b')     # 1st command close
-        gamefile.edit(0xafbd, b'\x0d')     # 2nd command close
+        #gamefile.edit(0xafbd, b'\x0d')     # 2nd command close
     for block in FILE_BLOCKS[filename]:
         block = Block(gamefile, block)
         previous_text_offset = block.start

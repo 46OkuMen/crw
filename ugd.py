@@ -69,6 +69,8 @@ menu_palette = {
     (0xff, 0xff, 0xff): BitArray([1, 1, 1, 1]),   # white
 }
 
+# The text remains orange (0001) because it gets misaligned at the 4th plane?
+
 def encode(filename, ugd_filename):
     im = Image.open(filename)
     print(im.size)
@@ -95,16 +97,16 @@ def encode(filename, ugd_filename):
                     rowdata =[pix[col, row][0:3] for col in range(b*8, (b*8)+8)]
 
                     bool_array = [menu_palette[c][p] for c in rowdata]
-                    print(rowdata)
-                    print(bool_array)
+                    #print(rowdata)
+                    #print(bool_array)
 
                     ba = BitArray(bool_array)
                     val = ba.uint
-                    if 0x10 <= val <= 0x4f or 0x60 <= val <= 0x6f or 0x80 <= val <= 0x9f or 0xb0 <= val <= 0xef:
+                    if val:
                         f.write(b'\xe1') # escape character??
-                        #print('e1')
+                        print('e1')
                     f.write(val.to_bytes(1, byteorder='little'))
-                    #print(ba)
+                    print(p, b, row, ba)
 
 if __name__ == '__main__':
     filename = sys.argv[1]

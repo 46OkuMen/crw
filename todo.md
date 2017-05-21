@@ -3,7 +3,21 @@
 	* Somewhere in the system disk?
 
 ### Images
-* Try messing with the Reiko portrait instead of the bar. Starker color differences, easier to load on demand, smaller.
+* BAR_A.UGD
+	* Menu before missions.
+	* Original: Done
+* BAR_B.UGD
+	* Appears faded on the bonus screen. Where to find it non-faded?
+* BORNAS.UGD
+	* 
+* CHARA_E.UGD
+	* Hanzou's status pic. Has a Japanese character in the background
+
+* FACE06.UGD
+	* Hanzou's portrait. Name is Japanese, plus a Japanese character in the background
+
+* FACE07.UGD
+	*Kashiwada's portrait
 
 ### Patcher
 * Gotta call it Pachy98-CRW.exe.
