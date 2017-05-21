@@ -149,19 +149,22 @@ grey  grey   grey grey    blue  blue grey  blue
 It's like the data is written to shine through windows. Writing data has no effect if it's already white, so it only shows up in the "window" of the blackness/grey/orange
 
 # Palette
-0000 black  #000000
-1000 purple #4411aa
-0100 brown  #663300
-1100 green  #558800
-0110 blue   #5588dd
-1110 orange #ee8844 (?)
-0111 beige  #ccccaa
-1111 grey   #998899
-???? pale   #ffccaa
-???? white  #ffffff
-???? red    #dd3311
-???? blugrey #665577
-???? grngrey #aaaa55
-???? peach   #ffaa77
-???? tan     #cc6611
-???? ltoran  #ff9933
+0000 black    #000000
+0001 ltoran   #ff9933
+0010 grngrey  #aaaa55
+0011 orange   #ee8844
+0100 blue     #5588dd
+0101 brown    #663300
+0110 dkgrey   #998899
+0111 pale     #ffccaa
+1000 purple   #4411aa
+1001 red      #dd3311
+1010 blugrey  #665577
+1011 peach    #ffaa77
+1100 green    #558800
+1101 tan      #cc6611
+1110 ltgrey   #ccccaa
+1111 white    #ffffff
+
+1f = 0
+2f = 1
