@@ -12,6 +12,11 @@
 		* This code is present in all CR*.EXE files and OPEN.EXE.
 		* Replace all instances of 807efc20 -> 807efc1f. Use 1f as the control code instead.
 
+* Level Skip Cheat
+	* Beat Mission 1 and make a save state (Slot 7 right now) at the screen that asks you to switch to the Demo Disk.
+	* Enter a mission and save the game legitimately. (Necessary? Not sure)
+	* Load the state.
+	* The game will now think you've just completed whatever level you're in, with all your members surviving.
 
 * Pointers:
 	* Loads strings pointed to by [si]. "Move" text (at 0x11862) has a [si] value of 0x0842, which would put 0x0 at 0x11020 (which is where the Borland compiler message is!)
@@ -38,9 +43,6 @@
 			* 56 68 24 09 9a
 			* 57 68 35 09 9a
 			* 08 68 3e 09 9a
-
-
-
 
 
 

@@ -14,6 +14,7 @@ FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0x9cd5),  # characters & guns
                             (0x9cd5, 0xa32c),  # credits
                             (0xa59b, 0xa6fc),  # main menu text
                             (0xa78e, 0xa826),  # disk switch
+                            (0xa893, 0xa903),  # demo disk switch
                             (0xa976, 0xa9db),  # disk switch
                             (0xaa4b, 0xaab0),  # disk switch
                             (0xaaee, 0xab10),  # unit types

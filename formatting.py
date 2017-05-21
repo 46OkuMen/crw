@@ -6,7 +6,7 @@ DemoDisk = Disk(DEST_DISK_DEMO)
 Data1Disk = Disk(DEST_DISK_DATA_1)
 
 titols =['TITOL.TXT',]
-ninmus = ['NINMU1.TXT']
+ninmus = ['NINMU1.TXT', 'NINMU2.TXT', 'NINMU3.TXT', 'NINMU4.TXT']
 ivs = []
 
 #ninmus = ['NINMU1.TXT', 'TITOL.TXT']
