@@ -1,13 +1,16 @@
 from romtools.disk import Disk
-from rominfo import DEST_DISK_DEMO, DEST_DISK_DATA_1, DEST_DISK_SYSTEM, EOF_CHAR
+from rominfo import DEST_DISK_DEMO, DEST_DISK_DATA_1, DEST_DISK_DATA_2, DEST_DISK_SYSTEM, EOF_CHAR
 
 SystemDisk = Disk(DEST_DISK_SYSTEM)
 DemoDisk = Disk(DEST_DISK_DEMO)
 Data1Disk = Disk(DEST_DISK_DATA_1)
+Data2Disk = Disk(DEST_DISK_DATA_2)
 
 titols =['TITOL.TXT',]
-ninmus = ['NINMU1.TXT', 'NINMU2.TXT', 'NINMU3.TXT', 'NINMU4.TXT']
-ivs = []
+ninmus = ['NINMU1.TXT', 'NINMU2.TXT', 'NINMU3.TXT', 'NINMU4.TXT', 'NINMU5.TXT', 'NINMU6.TXT',
+          'NINMU7.TXT', 'NINMU8.TXT']
+ivs = ['IV1.TXT', 'IV2.TXT', 'IV3.TXT', 'IV4.TXT', 'IV5.TXT', 'IV6.TXT',
+       'IV7.TXT', 'IV8.TXT', 'IV9.TXT', 'TALK.TXT']
 
 #ninmus = ['NINMU1.TXT', 'TITOL.TXT']
 #ivs = ['IV1.TXT', 'TALK.TXT']
@@ -25,6 +28,19 @@ def pad_iv(l):
     assert len(l) == 80
     return l
 
+def pad_iv9(l):
+    """Pad an IV*.TXT line with spaces to 80 characters.
+       Need to overwrite previous dialogue rather than end early.
+    """
+    if len(l) > 80:
+        l = l[:78]
+        l += b'\r\n'
+    elif len(l) < 80:
+        l.rstrip(b'\r\n')
+        l = l + b' '*(78 - len(l))
+        l += b'\r\n'
+    assert len(l) == 80
+    return l
 
 # For the NINMU*.TXT files, each line must be an even number of characters.
 for n in titols:
@@ -114,12 +130,16 @@ for i in ivs:
         lines = f.readlines()
 
     with open('patched\\' + i, 'wb') as f:
-        # TODO: Split lines; 32 chars each.
+        if i[2] == '9':
+            LINE_LENGTH = 34
+        else:
+            LINE_LENGTH = 32
         for l in lines:
             l = l.replace(b'\x81\x40', b'  ')
             l = l.replace(b'\xe3\x80\x80', b'   ')
             l = l.replace(b'\xe3\x80', b'  ')
             l = l.replace(b'\x1a', b' ')
+            l = l.replace(b'\xef\xbb\xbf', b' ')
             if i.startswith("IV") and len(l.strip()) == 0:
                 continue
             l = l.rstrip(b'\r\n')
@@ -132,13 +152,13 @@ for i in ivs:
             for j, _ in enumerate((firstline, secondline, thirdline)):
                 if words:
                     window[j] = words.pop(0)
-                    while words and len(window[j] + b' ' + words[0]) <= 32:
+                    while words and len(window[j] + b' ' + words[0]) <= LINE_LENGTH:
                         window[j] += b' ' + words.pop(0)
-                    if len(window[j]) < 32:
+                    if len(window[j]) < LINE_LENGTH:
                         if j == 2:
-                            window[j] += EOF_CHAR*(32-len(window[j]))
+                            window[j] += EOF_CHAR*(LINE_LENGTH-len(window[j]))
                         else:
-                            window[j] += b' '*(32-len(window[j]))
+                            window[j] += b' '*(LINE_LENGTH-len(window[j]))
 
             if words:
                 print("Not all words made it into this window")
@@ -147,12 +167,19 @@ for i in ivs:
             joined_lines = pad_iv(joined_lines)
             print(joined_lines)
             f.write(joined_lines)
-    if i.startswith("IV"):
+    if i.startswith("IV") and int(i[2]) < 5:
         Data1Disk.insert('patched\\' + i)
+    elif i.startswith("IV") and 5 <= int(i[2]) < 9:
+        Data2Disk.insert('patched\\' + i)
+    elif i.startswith("IV") and 9 == int(i[2]):
+        DemoDisk.insert('patched\\' + i)
     else:
         SystemDisk.insert('patched\\' + i)
 
-"""with open('patched\\original_TALK.TXT', 'rb') as f:
+# END.TXT needs to be padded to 38 chars per line. And needs the right EOF char.
+
+"""
+with open('patched\\original_TALK.TXT', 'rb') as f:
     lines = f.readlines()
 with open('patched\\TALK.TXT', 'wb') as f:
     for l in lines:
@@ -165,6 +192,7 @@ with open('patched\\TALK.TXT', 'wb') as f:
             l = l.rstrip(b'\r\n')
             l = l.rstrip()
             print(l)
+    SystemDisk.insert('patched\\TALK.TXT')
 """
 
 #SystemDisk.insert('patched\CR1.EXE')

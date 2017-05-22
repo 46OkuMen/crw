@@ -14,26 +14,22 @@ PtrDump = PointerExcel(POINTER_XLS_PATH)
 OriginalCRW = Disk(ORIGINAL_ROM_PATH, dump_excel=Dump, pointer_excel=PtrDump)
 TargetCRW = Disk(TARGET_ROM_PATH)
 
-FILES_TO_REINSERT = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE']
+FILES_TO_REINSERT = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
+                     'CR6.EXE', 'CR7.EXE', 'CR8.EXE',]
 
 def mission_ASM_hacks(gamefile):
     first_open_index = gamefile.filestring.index(b'\xc7\x46\xfc\x06\x00') + 3
-    gamefile.edit(first_open_index, b'\x0b')
-    assert first_open_index == 0xb034
-    # TODO: These indices are for CR2 only. Remove them when applying to the rest.
+    gamefile.edit(first_open_index, b'\x0d')
 
     first_close_index = gamefile.filestring.find(b'\xc7\x46\xfc\x06\x00', first_open_index) + 3
-    gamefile.edit(first_close_index, b'\x0b')
-    assert first_close_index == 0xb4af
+    gamefile.edit(first_close_index, b'\x0d')
 
     first_highlight_index = gamefile.filestring.find(b'\xc7\x46\xfa\x04\x00') + 3
-    gamefile.edit(first_highlight_index, b'\x09')
-    assert first_highlight_index == 0xad34
+    gamefile.edit(first_highlight_index, b'\x0b')
     # TODO: What about the duplicate much later?
 
     EOF_control_code_index = gamefile.filestring.find(b'\x80\x7e\xfc\x20') + 3
     gamefile.edit(EOF_control_code_index, EOF_CHAR)
-    assert EOF_control_code_index == 0xa43a
 
 for filename in FILES_TO_REINSERT:
     gamefile_path = os.path.join('original', 'files', filename)
@@ -46,18 +42,7 @@ for filename in FILES_TO_REINSERT:
         gamefile.edit(0x8213, EOF_CHAR)
         gamefile.edit(0x84c1, EOF_CHAR)
 
-    if filename == 'CR1.EXE':
-        gamefile.edit(0x9f3c, EOF_CHAR)     # Scenario EOF byte change
-        gamefile.edit(0xa836, b'\x09')     # 1st command highlight    # c746fa0400
-        #gamefile.edit(0xa842, b'\x0b')     # 2nd command highlight
-        gamefile.edit(0xab36, b'\x0b')     # 1st command open
-        #gamefile.edit(0xab6c, b'\x0d')     # 2nd command open
-        gamefile.edit(0xafb1, b'\x0b')     # 1st command close
-        #gamefile.edit(0xafbd, b'\x0d')     # 2nd command close
-
-    # A smarter approach. Might not need to find all these manually
-    # TODO: Apply this to CR1 as well.
-    if filename == 'CR2.EXE':
+    if filename.startswith("CR"):
         mission_ASM_hacks(gamefile)
 
     for block in FILE_BLOCKS[filename]:
@@ -102,4 +87,5 @@ for filename in FILES_TO_REINSERT:
         assert block_diff == 0, block_diff
 
         block.incorporate()
+
     gamefile.write()

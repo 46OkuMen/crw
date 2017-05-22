@@ -17,9 +17,10 @@ FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0x9cd5),  # characters & guns
                             (0xa893, 0xa903),  # demo disk switch
                             (0xa976, 0xa9db),  # disk switch
                             (0xaa4b, 0xaab0),  # disk switch
-                            (0xaaee, 0xab10),  # unit types
-                            (0xaba0, 0xabbd),  # confirm/cancel
+                            (0xaaee, 0xab15),  # unit types
+                            (0xaba0, 0xabbe),  # confirm/cancel
                             (0xadb4, 0xadd1),  # more confirm/cancel
+                            (0xae3e, 0xae6b),  # unit types & filenames
                             (0xaea5, 0xaeda),  # selection
                             (0xaf04, 0xaf2c)],  # dialog"]
                 'CR1.EXE': [(0x11107, 0x111e3), # english names/movements
