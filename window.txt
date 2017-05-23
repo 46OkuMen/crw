@@ -74,3 +74,5 @@ The width of both highlights is at 2a742.
 
 	1076:3877 c746fa0800 mov [bp-06], 8  ; or is this? (dunno what this is) a842
 
+Look for:
+	c746fa0600
