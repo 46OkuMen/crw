@@ -4,7 +4,16 @@
 		* Use two-line dialogue for now.
 * "ZOU" appears in highlighted empty slots in the mech weapons screen.
 	* From "HANZOU".
-	* Can I manually edit that pointer to go somewhere else?\
+	* Can I manually edit that pointer to go somewhere else?
+	* It's not a pointer at all. There's an instruction 05f50050 (add ax, 0xf5) that creates the 0xde value, and this gets pushed to the stack and loaded as a value later.
+		* But this is used to line up every weapon name! Increasing it to 0xf8 causes problems while highlighting other weapons, cutting off the first three letters...
+	* It would be better to just move Hanzou's name!
+		* Giving the 0xdb location for Hanzou's name:
+mov al, [3127]    ; now what's in [3127]? How does it compare for other characters?
+				  ; 6 for Hanzou, 7 for Kashiwada, 0 for Reiko, etc.
+cbw
+imul ax, ax, 0d       ; what if I multiply this by 0c? (that works. Just decrease the padding by 1, then)
+058d00 add ax, 008d   ; this is at 0x10e4f. Changing it has the same effect for all characters.
 * Credits are still a little glitchy.
 	* Alignment gets messed up around Anime Studio Torotoro.
 	* Random period after PRESENTED BY WIZ.
@@ -12,14 +21,6 @@
 
 ### Images
 * Waiting for image edits now.
-
-### Patcher
-* Gotta call it Pachy98-CRW.exe.
-
-### Another weird thing
-* Why does loading some of the save states break the game forever? (5, 6)
-	* Probably due to differences in OPEN.EXE.
-	* Best to delete these saves and make new ones.
 
 ### Other versions mystery
 * So PSX is definitely inferior. Controls are bad, dialogue lacks character. Sweet opening though.

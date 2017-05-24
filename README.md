@@ -29,9 +29,9 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 | Mission 8 System  | 100% | (128 / 128)   |
 | Ending Dialogue   | 100% |  (26 / 26)    |
 | Ending Story      | 100% |  (22 / 22)    |
-| End Credits       |  0%  |   (1 / 56)    |
+| End Credits       | 100% |  (56 / 56)    |
 | Interface Images  |  0%  |   (0 / 16?)   |
-| Total             | 96%  |(1549 / 1620)  |
+| Total             | 99%  |(1604 / 1620)  |
 
 
 ### How do I use this?
