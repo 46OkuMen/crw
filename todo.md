@@ -13,6 +13,7 @@ mov al, [3127]    ; now what's in [3127]? How does it compare for other characte
 				  ; 6 for Hanzou, 7 for Kashiwada, 0 for Reiko, etc.
 cbw
 imul ax, ax, 0d       ; what if I multiply this by 0c? (that works. Just decrease the padding by 1, then)
+                      ; this is at 0df0:2f4c 6bc00d
 058d00 add ax, 008d   ; this is at 0x10e4f. Changing it has the same effect for all characters.
 * Credits are still a little glitchy.
 	* Alignment gets messed up around Anime Studio Torotoro.
