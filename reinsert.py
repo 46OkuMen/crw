@@ -41,7 +41,8 @@ for filename in FILES_TO_REINSERT:
         gamefile.edit(0x582a, EOF_CHAR)
         gamefile.edit(0x8213, EOF_CHAR)
         gamefile.edit(0x84c1, EOF_CHAR)
-        gamefile.edit(0x6ade, b'\x0c')       # "ZOU" bug fix
+        gamefile.edit(0x6042, b'\x0c')       # "ZOU" bug fix, STATUS
+        gamefile.edit(0x6ade, b'\x0c')       # "ZOU" bug fix, MECH
 
     if filename.startswith("CR"):
         mission_ASM_hacks(gamefile)
