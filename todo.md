@@ -19,9 +19,7 @@ imul ax, ax, 0d       ; what if I multiply this by 0c? (that works. Just decreas
 	* Alignment gets messed up around Anime Studio Torotoro.
 	* Random period after PRESENTED BY WIZ.
 * Some kind of error when quitting Mission 2, involving CRW_IPL.COM.
-
-### Images
-* Waiting for image edits now.
+* Need to update "Search" to "Scout".
 
 ### Other versions mystery
 * So PSX is definitely inferior. Controls are bad, dialogue lacks character. Sweet opening though.
