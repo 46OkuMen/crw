@@ -30,8 +30,8 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 | Ending Dialogue   | 100% |  (26 / 26)    |
 | Ending Story      | 100% |  (22 / 22)    |
 | End Credits       | 100% |  (56 / 56)    |
-| Interface Images  | 100% |  (18 / 18)    |
-| Total             | 100% |(1605 / 1622)  |
+| Interface Images  | 100% |  (19 / 19)    |
+| Total             | 100% |(1623 / 1623)  |
 
 
 ### How do I use this?

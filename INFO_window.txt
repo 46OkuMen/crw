@@ -31,4 +31,23 @@ Value in the stack: 174d -> (dmg) ->  17ec -> 1807 -> 1836
 Another value in the stack: 05 -> 0e -> 1c -> 24 -> 2c
 
 For the dmg column, that gets edited with:
-183c:0d18 037e08 add di, [bp+08
+183c:0d18 037e08 add di, [bp+08]  (value is 0e) dmg current
+
+183c:0c5d 037e08 add di, [bp+08]  (value is 11) dmg total
+
+183c:0c5d 037e08 add di, [bp+08]  (value is 18)
+
+183c:0c5d 037e08 add di, [bp+08]  (value is 1c)
+
+Well, this is how it loads it. How does it get there?
+
+0c74:177f 6a12 push +12
+later, there are push +15, push +18, etc.
+
+Stuff to search for: 681f039a410c3c1883c408
+
+COMMANDERATTACKER issue:
+
+look for stuff like 0c74:182e 688001 push 0180.
+(Pushes the location of one of the info strings)
+016e? for COMMANDER

@@ -50,6 +50,27 @@ gameplay_palette = {
     (0xcc, 0x66, 0x11): BitArray([1, 1, 0, 1]),  # tan
     (0xcc, 0xcc, 0xaa): BitArray([1, 1, 1, 0]),  # light grey
     (0xff, 0xff, 0xff): BitArray([1, 1, 1, 1]),  # white
+
+    (0xad, 0xad, 0x52): BitArray([0, 0, 1, 0]),  # green-grey
+    (0xcc, 0xcc, 0xaa): BitArray([1, 1, 1, 0]),  # light grey
+    (0x9c, 0x8c, 0x9c): BitArray([0, 1, 1, 0]),  # dark grey
+    (0x52, 0x8c, 0xde): BitArray([0, 1, 0, 0]),  # blue
+    (0xce, 0xce, 0xad): BitArray([1, 1, 1, 0]),  # light grey
+    (0xff, 0xce, 0xad): BitArray([0, 1, 1, 1]),  # pale
+    (0xff, 0xad, 0x73): BitArray([1, 0, 1, 1]),  # peach
+    (0xde, 0x31, 0x10): BitArray([1, 0, 0, 1]),  # red
+    (0x63, 0x52, 0x73): BitArray([1, 0, 1, 0]),  # blue-grey
+    (0xff, 0x9c, 0x31): BitArray([0, 0, 0, 1]),  # light orange
+    (0xce, 0x63, 0x10): BitArray([1, 1, 0, 1]),  # tan
+    (0x63, 0x31, 0x00): BitArray([0, 1, 0, 1]),  # brown
+    (0x42, 0x10, 0xad): BitArray([1, 0, 0, 0]),  # purple
+    (0xef, 0x8c, 0x42): BitArray([0, 0, 1, 1]),  # orange
+    (0x52, 0x8c, 0x00): BitArray([1, 1, 0, 0]),  # green
+
+    (0xee, 0xee, 0xee): BitArray([1, 1, 1, 1]),  # white
+    (0xbb, 0xbb, 0x99): BitArray([1, 1, 1, 0]),  # light grey
+    (0x99, 0x99, 0x44): BitArray([0, 0, 1, 0]),  # green-grey
+    (0x44, 0x77, 0xcc): BitArray([0, 1, 0, 0]),  # blue
 }
 
 menu_palette = {
@@ -73,6 +94,7 @@ menu_palette = {
     (0x07, 0x07, 0x07): BitArray([0, 0, 0, 0]),   # almost black
     (0x66, 0x78, 0xdd): BitArray([0, 1, 0, 0]),   # almost periwinkle
     (0xff, 0x00, 0x00): BitArray([1, 0, 0, 1]),   # pure red
+    
 }
 
 face06_palette = {
@@ -148,6 +170,26 @@ face19_palette = {
 # green grey is mismapped to dark green.
 # purple grey 
 
+main_g_palette_values = [b'\x00\x00\x00',
+                  b'\x04\x01\x0a',
+                  b'\x05\x08\x0d',
+                  b'\x05\x08\x00',
+                  b'\x0a\x0a\x05',
+                  b'\x06\x05\x07',
+                  b'\x09\x08\x09',
+                  b'\x0c\x0c\x0a',
+                  b'\x0f\x09\x03',
+                  b'\x0d\x03\x01',
+                  b'\x06\x03\x00',
+                  b'\x0c\x06\x01',
+                  b'\x0e\x08\x04',
+                  b'\x0f\x0a\x07',
+                  b'\x0f\x0c\x0a',
+                  b'\x0f\x0f\x0f'
+                  ]
+
+main_g_palette_string = b''.join(main_g_palette_values)
+
 def encode(filename, ugd_filename, palette=menu_palette):
     im = Image.open(filename)
     print(im.size)
@@ -163,7 +205,10 @@ def encode(filename, ugd_filename, palette=menu_palette):
     #print(blocks)
     
     with open(ugd_filename, 'wb') as f:
-        if im.size[1] > 255:
+        if 'MAIN_G' in ugd_filename:
+            f.write(b'\x02')
+            f.write(main_g_palette_string)
+        elif im.size[1] > 255:
             f.write(b'\x00')
         else:
             f.write(b'\x01')
@@ -193,12 +238,12 @@ def encode(filename, ugd_filename, palette=menu_palette):
 
 if __name__ == '__main__':
     demo_disk_filenames = ['BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
-    data_disk_filenames = ['FACE04.png', 'FACE05.png', 'FACE06.png', 'FACE07.png', 'FACE17.png', 'FACE18.png',
-                           'SI100.png']
+    data_disk_filenames = ['FACE04.png', 'FACE05.png', 'FACE06.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'FACE19.png',
+                           'FACE20.png', 'FACE21.png', 'SI100.png', 'MAIN_G.png']
 
 
     menu_palette_filenames = ['BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
-    gameplay_palette_filenames = ['FACE04.png', 'FACE05.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'SI100.png']
+    gameplay_palette_filenames = ['FACE04.png', 'FACE05.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'SI100.png', 'MAIN_G.png']
     face06_palette_filenames = ['FACE06.png',]
     face19_palette_filenames = ['FACE19.png', 'FACE20.png', 'FACE21.png']
 
