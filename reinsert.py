@@ -60,11 +60,14 @@ def mission_ASM_hacks(gamefile):
 
     # Type math change
 
-    # TODO: These currrently only work for CR1.EXE. Gotta find a better search string for them.
-    type_start_index = gamefile.filestring.find(b'\x98\x6b\xc0\x09\x05\xe7') + 6
-    gamefile.edit(type_start_index, b'\xdd')
+    if gamefile.filename == 'CR1.EXE':
+        type_start_index = gamefile.filestring.find(b'\x26\x98\x6b\xc0\x09\x05\xe7') + 6
+        type_mult_index = gamefile.filestring.find(b'\x26\x98\x6b\xc0\x09') + 4
+    else:
+        type_start_index = gamefile.filestring.find(b'\x27\x98\x6b\xc0\x09\x05\xe7') + 6
+        type_mult_index = gamefile.filestring.find(b'\x27\x98\x6b\xc0\x09') + 4
 
-    type_mult_index = gamefile.filestring.find(b'\x26\x98\x6b\xc0\x09') + 4
+    gamefile.edit(type_start_index, b'\xdd')
     gamefile.edit(type_mult_index, b'\x0a')
 
     assert type_start_index - 6 != -1
@@ -90,13 +93,13 @@ for filename in FILES_TO_REINSERT:
         block = Block(gamefile, block)
         previous_text_offset = block.start
         diff = 0
-        print(repr(block.blockstring))
+        #print(repr(block.blockstring))
         for t in Dump.get_translations(block):
             if t.en_bytestring != t.jp_bytestring:
-                print(t)
+                #print(t)
                 loc_in_block = t.location - block.start + diff
 
-                print(t.jp_bytestring)
+                #print(t.jp_bytestring)
                 i = block.blockstring.index(t.jp_bytestring)
                 j = block.blockstring.count(t.jp_bytestring)
 
@@ -105,11 +108,11 @@ for filename in FILES_TO_REINSERT:
                     index = block.blockstring.find(t.jp_bytestring, index)
                     if index == -1:
                         break
-                    print('jp bytestring found at', index)
+                    #print('jp bytestring found at', index)
                     index += len(t.jp_bytestring) # +2 because len('ll') == 2
 
-                if j > 1:
-                    print("%s multiples of this string found" % j)
+                #if j > 1:
+                #    print("%s multiples of this string found" % j)
                 assert loc_in_block == i, (hex(loc_in_block), hex(i))
 
                 block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
