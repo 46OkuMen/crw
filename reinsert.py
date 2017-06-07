@@ -33,20 +33,21 @@ def mission_ASM_hacks(gamefile):
     gamefile.edit(EOF_control_code_index, EOF_CHAR)
 
     # Info window edits
-    dmg_current_index4 = gamefile.filestring.find(b'\x50\x57\x6a\x0e') + 3
-    gamefile.edit(dmg_current_index4, b'\x0f')
+
+    dmg_current_index = gamefile.filestring.find(b'\x50\x57\x6a\x0e') + 3
+    gamefile.edit(dmg_current_index, b'\x0f')
 
     slash_index = gamefile.filestring.find(b'\xf8\x50\x57\x6a\x11') + 4
     gamefile.edit(slash_index, b'\x12')
 
-    dmg_total_index6 = gamefile.filestring.find(b'\x50\x57\x6a\x12\x8b\xde') + 3
-    gamefile.edit(dmg_total_index6, b'\x13')
+    dmg_total_index = gamefile.filestring.find(b'\x50\x57\x6a\x12\x8b\xde') + 3
+    gamefile.edit(dmg_total_index, b'\x13')
 
     x_index = gamefile.filestring.find(b'\x50\x57\x6a\x15') + 3
     gamefile.edit(x_index, b'\x16')
 
-    colon_index4 = gamefile.filestring.find(b'\x50\x57\x6a\x18\x68') + 3
-    gamefile.edit(colon_index4, b'\x19')
+    colon_index = gamefile.filestring.find(b'\x50\x57\x6a\x18\x68') + 3
+    gamefile.edit(colon_index, b'\x19')
 
     y_index = gamefile.filestring.find(b'\x50\x57\x6a\x18\x8b') + 3
     gamefile.edit(y_index, b'\x19')
@@ -59,11 +60,15 @@ def mission_ASM_hacks(gamefile):
 
     # Type math change
 
-    type_start_index = gamefile.filestring.find(b'\x26\x98\x6b\xc0\x09\x05\xe7') + 6
+    # TODO: These currrently only work for CR1.EXE. Gotta find a better search string for them.
+    type_start_index = gamefile.filestring.find(b'\x98\x6b\xc0\x09\x05\xe7') + 6
     gamefile.edit(type_start_index, b'\xdd')
 
     type_mult_index = gamefile.filestring.find(b'\x26\x98\x6b\xc0\x09') + 4
     gamefile.edit(type_mult_index, b'\x0a')
+
+    assert type_start_index - 6 != -1
+    assert type_mult_index - 4 != -1
 
 for filename in FILES_TO_REINSERT:
     gamefile_path = os.path.join('original', 'files', filename)
