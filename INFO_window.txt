@@ -1,0 +1,34 @@
+EBX values:
+
+e7  REIKO
+141 COMMAND
+16e MANUAL
+180 WAIT
+
+102 KID
+14a ATTACK
+16e MANUAL
+180 WAIT
+
+10b BOMBER
+153 DEFENSE
+16e MANUAL
+180 WAIT
+
+11d HANZOU
+15c SNIPER
+16e MANUAL
+180 WAIT
+
+Name column: +0
+Damage column: +8
+X:Y column: +19
+Type column: +24
+Command column: +32
+
+Value in the stack: 174d -> (dmg) ->  17ec -> 1807 -> 1836
+
+Another value in the stack: 05 -> 0e -> 1c -> 24 -> 2c
+
+For the dmg column, that gets edited with:
+183c:0d18 037e08 add di, [bp+08
