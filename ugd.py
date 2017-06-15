@@ -94,6 +94,7 @@ menu_palette = {
     (0x07, 0x07, 0x07): BitArray([0, 0, 0, 0]),   # almost black
     (0x66, 0x78, 0xdd): BitArray([0, 1, 0, 0]),   # almost periwinkle
     (0xff, 0x00, 0x00): BitArray([1, 0, 0, 1]),   # pure red
+    (0xf9, 0x74, 0x11): BitArray([0, 0, 0, 1]),   # yet another orange
     
 }
 
