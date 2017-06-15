@@ -208,11 +208,12 @@ def encode(filename, ugd_filename, palette=menu_palette):
         if 'MAIN_G' in ugd_filename:
             f.write(b'\x02')
             f.write(main_g_palette_string)
+        elif 'WAKU_C' in ugd_filename:
+            f.write(b'\x01\x33\x01\x80')
         elif im.size[1] > 255:
             f.write(b'\x00')
         else:
             f.write(b'\x01')
-
             f.write(blocks.to_bytes(2, byteorder='little'))
             f.write(im.size[1].to_bytes(1, byteorder='little'))
 
@@ -237,18 +238,18 @@ def encode(filename, ugd_filename, palette=menu_palette):
                     #print(p, b, row, ba)
 
 if __name__ == '__main__':
-    demo_disk_filenames = ['BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
+    demo_disk_filenames = ['WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
     data_disk_filenames = ['FACE04.png', 'FACE05.png', 'FACE06.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'FACE19.png',
                            'FACE20.png', 'FACE21.png', 'SI100.png', 'MAIN_G.png']
 
 
-    menu_palette_filenames = ['BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
+    menu_palette_filenames = ['WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
     gameplay_palette_filenames = ['FACE04.png', 'FACE05.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'SI100.png', 'MAIN_G.png']
     face06_palette_filenames = ['FACE06.png',]
     face19_palette_filenames = ['FACE19.png', 'FACE20.png', 'FACE21.png']
 
    # Face19-21 probably have their own palette too
-    for filename in face19_palette_filenames + demo_disk_filenames + face06_palette_filenames + data_disk_filenames:
+    for filename in demo_disk_filenames + face06_palette_filenames + data_disk_filenames + face19_palette_filenames:
 
         filepath = os.path.join('edited_img', filename)
         ugd_filepath = filepath.replace('bmp', 'ugd').replace('png', 'ugd')

@@ -29,6 +29,9 @@ def mission_ASM_hacks(gamefile):
     gamefile.edit(first_highlight_index, b'\x0a')
     # TODO: What about the duplicate much later?
 
+    weapon_highlight_index = gamefile.filestring.find(b'\xc7\x46\xfa\x0d\x00') + 3
+    gamefile.edit(weapon_highlight_index, b'\x0e')
+
     EOF_control_code_index = gamefile.filestring.find(b'\x80\x7e\xfc\x20') + 3
     gamefile.edit(EOF_control_code_index, EOF_CHAR)
 

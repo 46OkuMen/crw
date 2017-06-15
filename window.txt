@@ -23,7 +23,7 @@ Replaced tons of 30's with 40's: didn't work
 	The line that adds +50 to di is telling it where in VRAM to draw some white pixels
 	So how to find the outer loop that tells it to draw more columns?
 
-1076:3e20 8b46fc mov ax, [bp-04] (= 6)
+1076:3e20 8b46fc mov ax, [bp-04] (= 6)d
 1076:3e23 05feff add ax, fffe    (= 4)
 1076:3e26 3b46fe cmp ax, [bp-02] (9a is indeed > 4)
 1076:3e29 7fe4 jg 3e0f           (jump executes)
