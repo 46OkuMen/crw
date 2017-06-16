@@ -1,5 +1,10 @@
 import os
 
+SRC_DISK_DEMO = os.path.join('original', 'CRW_demo.FDI')
+SRC_DISK_SYSTEM = os.path.join('original', 'CRW_system.FDI')
+SRC_DISK_DATA_1 = os.path.join('original', 'CRW_data1.FDI')
+SRC_DISK_DATA_2 = os.path.join('original', 'CRW_data2.FDI')
+
 DEST_DISK_DEMO = os.path.join('patched', 'CRW_demo.FDI')
 DEST_DISK_SYSTEM = os.path.join('patched', 'CRW_system.FDI')
 DEST_DISK_DATA_1 = os.path.join('patched', 'CRW_data1.FDI')
@@ -9,6 +14,26 @@ DEST_DISK_DATA_2 = os.path.join('patched', 'CRW_data2.FDI')
 # CRWUNI.TXT
 FILES = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
          'CR6.EXE', 'CR7.EXE', 'CR8.EXE']
+
+
+SYS_FILES = ['OPEN.EXE', 'CR1.EXE', 'CR2.EXE', 'CR3.EXE', 'CR4.EXE', 'CR5.EXE',
+             'CR6.EXE', 'CR7.EXE', 'CR8.EXE', 'CRWUNI.TXT', 'TALK.TXT']
+
+DEMO_FILES = ['NINMU1.TXT', 'NINMU2.TXT', 'NINMU3.TXT', 'NINMU4.TXT',
+              'NINMU5.TXT', 'NINMU6.TXT', 'NINMU7.TXT', 'NINMU8.TXT',
+              'TITOL.TXT', 'IV9.TXT', 'WAKU_C.UGD', 'BAR_A.UGD', 'BAR_B.UGD',
+              'C_STAT.UGD', 'END_2.UGD', 'M_STAT.UGD', 'WEAPONX.UGD',
+              'BORNAS.UGD']
+
+DATA_1_FILES = ['IV1.TXT', 'IV2.TXT', 'IV3.TXT', 'IV4.TXT', 'FACE04.UGD',
+                'FACE05.UGD', 'FACE06.UGD', 'FACE07.UGD', 'FACE17.UGD',
+                'FACE18.UGD', 'FACE19.UGD', 'FACE20.UGD', 'FACE21.UGD',
+                'SI100.UGD', 'MAIN_G.UGD']
+
+DATA_2_FILES = ['IV5.TXT', 'IV6.TXT', 'IV7.TXT', 'IV8.TXT', 'FACE04.UGD',
+                'FACE05.UGD', 'FACE06.UGD', 'FACE07.UGD', 'FACE17.UGD',
+                'FACE18.UGD', 'FACE19.UGD', 'FACE20.UGD', 'FACE21.UGD',
+                'SI100.UGD', 'MAIN_G.UGD']
 
 FILE_BLOCKS = {'OPEN.EXE': [(0x9afd, 0x9cd5),  # characters & guns
                             (0x9cd5, 0xa32c),  # credits

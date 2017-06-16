@@ -39,7 +39,7 @@ Then do some stuff and call 183c:0b89.
 1076:3dd0 7fe7 jg 3db9
 Then do some stuff and call 183c:0b89.
 
-
+ 
 After the second breakpoint of reading the commmand str:
 1076:3b3e c6061626ff mov [2616], ff
 3b43 mov [bp-04], 6
