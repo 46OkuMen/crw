@@ -135,4 +135,4 @@ for filename in FILES_TO_REINSERT:
 
         block.incorporate()
 
-    gamefile.write()
+    gamefile.write(path_in_disk='')

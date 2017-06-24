@@ -239,12 +239,12 @@ def encode(filename, ugd_filename, palette=menu_palette):
                     #print(p, b, row, ba)
 
 if __name__ == '__main__':
-    demo_disk_filenames = ['WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
+    demo_disk_filenames = ['T_MOJI.png', 'WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
     data_disk_filenames = ['FACE04.png', 'FACE05.png', 'FACE06.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'FACE19.png',
                            'FACE20.png', 'FACE21.png', 'SI100.png', 'MAIN_G.png']
 
 
-    menu_palette_filenames = ['WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
+    menu_palette_filenames = ['T_MOJI.png', 'WAKU_C.png', 'BAR_A.png', 'BAR_B.png', 'C_STAT.png', 'END_2.png', 'M_STAT.png', 'WEAPONX.png', 'BORNAS.png']
     gameplay_palette_filenames = ['FACE04.png', 'FACE05.png', 'FACE07.png', 'FACE17.png', 'FACE18.png', 'SI100.png', 'MAIN_G.png']
     face06_palette_filenames = ['FACE06.png',]
     face19_palette_filenames = ['FACE19.png', 'FACE20.png', 'FACE21.png']

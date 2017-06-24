@@ -23,7 +23,7 @@ DEMO_FILES = ['NINMU1.TXT', 'NINMU2.TXT', 'NINMU3.TXT', 'NINMU4.TXT',
               'NINMU5.TXT', 'NINMU6.TXT', 'NINMU7.TXT', 'NINMU8.TXT',
               'TITOL.TXT', 'IV9.TXT', 'WAKU_C.UGD', 'BAR_A.UGD', 'BAR_B.UGD',
               'C_STAT.UGD', 'END_2.UGD', 'M_STAT.UGD', 'WEAPONX.UGD',
-              'BORNAS.UGD']
+              'BORNAS.UGD', 'T_MOJI.UGD']
 
 DATA_1_FILES = ['IV1.TXT', 'IV2.TXT', 'IV3.TXT', 'IV4.TXT', 'FACE04.UGD',
                 'FACE05.UGD', 'FACE06.UGD', 'FACE07.UGD', 'FACE17.UGD',
