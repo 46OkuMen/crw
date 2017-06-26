@@ -26,6 +26,7 @@ for src, dest, files in ((DemoSrc, DemoDest, DEMO_FILES), (SysSrc, SysDest, SYS_
         patch_destination = os.path.join('patch', patch_filename)
         filepatch = Patch(f, patch_destination, edited='edited_' + f)
         filepatch.create()
+        print(patch_filename)
 
         os.remove(f)
         os.remove('edited_' + f)
