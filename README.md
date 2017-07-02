@@ -35,4 +35,4 @@ Romhacking utilities and notes developed as part of [46 OkuMen](http://46okumen.
 
 
 ### How do I use this?
-* Wait for a release!
+* Download the translation patch from [the 46 OkuMen project page](https://46okumen.com/projects/crw-metal-jacket/) or [Romhacking.net](http://www.romhacking.net/translations/3105/).
